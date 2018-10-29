@@ -1,0 +1,56 @@
+<div class="site-section bg-light">
+      <div class="container">
+        <%= render 'layouts/custom_header' %>
+        <div class="row mb-5">
+          <div class="col-md-7 section-heading">
+            <span class="subheading-sm">Tous les trajets</span>
+          </div>
+        </div>
+        <% if @routes.count == 0%>
+        Aucun trajet déposé.
+        <% if user_signed_in? %>
+         <center> <p><%= link_to new_route_path do %><span class="btn btn-primary">Déposer un trajet</span><% end %></p></center>
+        <% end %>
+        <% else %>
+        <table class="table">
+            <% @routes.each do |r|%>
+            <tr>
+              <td colspan="2">
+                <div class="row">
+                  <div class="col-md-6 col-lg-4">
+                   <div class="block-33">
+                      <div class="vcard d-flex mb-3" style="width: 1000px;">
+                        <% if r.user.photo_file_name.nil? %>
+                          <div class="image align-self-center">
+                            <img src="assets/person_2.jpg" alt="Photo">
+                          </div>
+                          <% else %>
+                          <div class="image align-self-center">
+                            <%= image_tag r.user.photo.url %>
+                          </div>
+                          <% end %>
+                        <div class="name-text align-self-center">
+                          <h2 class="heading"><%= r.departure_point%> --> <%= r.arrival_point%></h2>
+                          <span class="meta">Date de départ: <%= r.departure_time.strftime("%m/%d/%Y à %H:%M") %></span>
+                          <span class="meta">Nombre de places disponibles: <%= r.place_number %></span>
+                        </div>
+                        <div class="image align-self-center"></div>
+                        <% if user_signed_in? %>
+                          <% if r.place_number == 0%>
+                          <div class="image align-self-center"><p><span class="btn btn-primary">Complet</span></p></div>
+                          <% else %>
+                          <div class="image align-self-center"><p><%= link_to new_reservation_path(:route_res => r.id) do %><span class="btn btn-primary">Réserver</span><% end %></p></div>
+                          <% end %>
+                        <% end %>
+                        <div class="image align-self-center"><p><%= link_to r do %><span class="btn btn-primary">Envoyer un message</span><% end %></p></div>
+                      </div>
+                    </div>
+                  </div>       
+                </div>
+                </td>
+            </tr>
+            <% end %>
+        </table>
+        <% end %>
+      </div>
+    </div>

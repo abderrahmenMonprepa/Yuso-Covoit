@@ -1,0 +1,80 @@
+<style type="text/css">
+
+@import url("https://fonts.googleapis.com/css?family=Rubik:300,400,500,600,700");
+/* Style for login view if user is not connected */
+
+.login-register {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100%;
+  width: 100%;
+  padding: 10% 0;
+  position: fixed; }
+
+.login-box {
+  width: 300px;
+  margin: 0 auto; }
+  .login-box .footer {
+    width: 100%;
+    left: 0px;
+    right: 0px; }
+  .login-box .social {
+    display: block;
+    margin-bottom: 30px; }
+
+#recoverform {
+  display: none; }
+
+.login-sidebar {
+  padding: 0px;
+  margin-top: 0px; }
+  .login-sidebar .login-box {
+    right: 0px;
+    position: absolute;
+    height: 100%; }
+
+</style>
+ 
+              
+      <section id="wrapper">
+        <div class="login-register">
+            <div class="login-box card">
+                <div class="card-body">
+                    <%= form_for(resource, as: resource_name, url: session_path(resource_name) , class: "form-horizontal form-material" , id: "loginform") do |f| %>
+
+
+                        <div class="form-group">
+                            <%= f.label :email %><br />
+                            <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: 'form-control'%>
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :password, "Mot de passe" %><br />
+                            <%= f.password_field :password, autocomplete: "off" , class: 'form-control' %>
+                        </div>
+
+                        <% if devise_mapping.rememberable? -%>
+                            <div class="field">
+                              <%= f.check_box :remember_me  %>
+                              <%= f.label :remember_me , "Se rappeler de moi" %>
+                            </div>
+                        <% end -%>
+                        <div class="form-group text-center">
+                          <div class="col-xs-12 p-b-20">
+                              <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Log In</button>
+                          </div>
+
+                          <div class="form-group m-b-0">
+                              <div class="col-sm-12 text-center">
+                                  Vous n'avez pas encore de compte? <a> <b> <%= link_to "S'inscrire" , new_user_registration_path ,class: "text-info m-l-5" %></b></a>
+                              </div>
+                          </div>
+                        </div>
+                    <% end %>
+
+                    
+            </div>
+        </div>
+      </div>
+    </section>

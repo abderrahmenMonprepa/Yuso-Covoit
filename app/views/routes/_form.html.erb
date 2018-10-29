@@ -1,0 +1,152 @@
+
+<% if user_signed_in? %>
+<div class="site-section block-13 bg-light">
+  <%= render 'layouts/custom_header' %><br>
+  <div class="container" ng-app="">
+     <div class="row mb-5">
+        <div class="col-md-7 section-heading">
+          <span class="subheading-sm">Déposer votre trajet</span>
+        </div>
+      </div>
+
+
+        <div class="form-group">
+          Je suis 
+          <button class="btn btn-primary" ng-click="passenger = !passenger">Passager</button>
+          <button class="btn btn-info" ng-click="conductor = !conductor">Conducteur</button>
+        </div>
+
+      <%= form_with(model: route, local: true , :html => { "ng-show" => "passenger" ,style: "display: block;"}) do |form| %>
+        <% if route.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(route.errors.count, "error") %> prohibited this route from being saved:</h2>
+
+            <ul>
+            <% route.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <%= form.hidden_field :passenger_or_conducter, value: "Passager"%>
+
+       
+        <div class="form-group">
+          <%= form.label :departure_point, "Point de départ" %>
+          <%= form.collection_select :departure_point, City.all,  :city_name, :city_name,{ :include_blank => "Sélectionner votre point de départ" } , {class: "form-control" } %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :arrival_point, "Point d'arrivée" %>
+          <%= form.collection_select :arrival_point, City.all,  :city_name, :city_name,{ :include_blank => "Sélectionner votre point d'arrivée" } , {class: "form-control" } %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :departure_time , "Date de départ" %>
+          <%= form.datetime_select :departure_time, id: :route_departure_time ,class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :place_number, "Nombre de places souhaitées" %>
+          <%= form.number_field :place_number, id: :route_place_number ,class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :animal_permission, "Accepte les animaux" %>
+          <%= form.check_box :animal_permission, id: :route_animal_permission ,class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :smoker_permission , "Je suis fumeur" %>
+          <%= form.check_box :smoker_permission, id: :route_smoker_permission ,class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :luggage , "Je possède des bagages" %>
+          <%= form.check_box :luggage, id: :route_luggage ,class: "form-control" %>
+        </div>
+
+
+        <center>
+          <div class="actions">
+            <%= form.submit "Déposer trajet" , class: "btn btn-primary" %>
+          </div>
+        </center>
+    <% end %>
+
+    <%= form_with(model: route, local: true , :html => {"ng-show" => "conductor"}) do |form| %>
+        <% if route.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(route.errors.count, "error") %> prohibited this route from being saved:</h2>
+
+            <ul>
+            <% route.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <%= form.hidden_field :passenger_or_conducter, value: "Conducteur" %>
+
+       
+        <div class="form-group">
+          <%= form.label :departure_point, "Point de départ" %>
+          <%= form.collection_select :departure_point, City.all,  :city_name, :city_name,{ :include_blank => "Sélectionner votre point de départ" } , {class: "form-control" } %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :arrival_point, "Point d'arrivée" %>
+          <%= form.collection_select :arrival_point, City.all,  :city_name, :city_name,{ :include_blank => "Sélectionner votre point d'arrivée" } , {class: "form-control" } %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :departure_time , "Date de départ" %>
+          <%= form.datetime_select :departure_time, id: :route_departure_time ,class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :estimated_arrival_time , "Date d'arrivée estimée" %>
+          <%= form.datetime_select :estimated_arrival_time, id: :route_estimated_arrival_time ,class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :place_number, "Nombre de places disponbles" %>
+          <%= form.number_field :place_number, id: :route_place_number ,class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :price , "Prix (en DT)" %>
+          <%= form.text_field :price, id: :route_price ,class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :animal_permission, "Accepte les animaux" %>
+          <%= form.check_box :animal_permission, id: :route_animal_permission ,class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :smoker_permission , "Je suis fumeur" %>
+          <%= form.check_box :smoker_permission, id: :route_smoker_permission ,class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :luggage , "Je possède des bagages" %>
+          <%= form.check_box :luggage, id: :route_luggage ,class: "form-control" %>
+        </div>
+
+        <center>
+          <div class="actions">
+            <%= form.submit "Déposer trajet" , class: "btn btn-primary"%>
+          </div>
+        </center>
+    <% end %>
+
+
+
+  </div>
+</div>
+
+<% else %>
+  <%= render 'register' %>
+<% end %>
+

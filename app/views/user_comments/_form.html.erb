@@ -1,0 +1,34 @@
+<%= form_with(model: user_comment, local: true) do |form| %>
+  <% if user_comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_comment.errors.count, "error") %> prohibited this user_comment from being saved:</h2>
+
+      <ul>
+      <% user_comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :user_comment_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comment_validation %>
+    <%= form.text_field :comment_validation, id: :user_comment_comment_validation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, id: :user_comment_user_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+

@@ -1,0 +1,78 @@
+
+<%= render 'layouts/custom_header' %>
+<br>
+<br>
+<% if user_signed_in? %>
+<br>
+<br>
+<center><h1>Les messages envoyés</h1></center>
+    <% if @messages.count == 0 %>
+        <center>
+          Messagerie vide.
+        </center>
+
+    <% else %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Trajet</th>
+              <th>Message</th>  
+              <th>Réponse</th>  
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @messages.each do |m| %>
+              <tr>
+                <% route = Route.find_by_id(m.route_id) %>
+                <td><%= route.departure_point %> --> <%= route.arrival_point %></td>
+                <td><%= m.message_content %></td>
+                <td><%= route.messages.each do |r| %>
+                  <%= r.message_content %><br<
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    <% end %>
+<% else %>
+<%= render 'routes/register' %>
+<% end %>
+<br>
+
+<center><h1>Les messages reçus</h1></center>
+<% if @routes.count == 0 %>
+        <center>
+          Aucun message reçu.
+        </center>
+<% else %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Route</th>
+              <th>Message</th>   
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @routes.each do |r| %>
+              <tr>
+                <% if r.messages.count != 0 %>
+                  <td><%= r.departure_point %> --> <%= r.arrival_point %></td>
+                  
+                  <td><% r.messages.each do |m| %>
+                      <% if not (m.message_content.length)>1 %>
+                        Pas de message reçu
+                      <% else %>
+                        <%= m.message_content %><br>
+                      <% end %>
+                    <% end %>
+                  </td>
+                  <td><p><%= link_to r do %><span class="btn btn-primary">Répondre</span><% end %></p></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+<% end %>

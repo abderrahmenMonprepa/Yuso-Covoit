@@ -1,0 +1,43 @@
+
+
+
+    <div class="site-section block-13 bg-light">
+      <div class="container">
+         <div class="row mb-5">
+            <div class="col-md-7 section-heading">
+              <span class="subheading-sm">Se conecter</span>
+            </div>
+          </div>
+
+              
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+
+                <div class="form-group">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email ,class: "form-control",id: "email" , placeholder: "Email" %>
+                </div>
+
+
+                <div class="form-group">
+                  <%= f.label :password %>
+                  <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+                  <% end %><br />
+                  <%= f.password_field :password, autocomplete: "new-password"  ,class: "form-control",id: "pwd" , placeholder: "Mot de passe" %>
+                </div>
+
+
+
+                <center>
+                  <div class="actions">
+                    <%= f.submit "Se connecter" , class: "btn btn-primary" %>
+                  </div>
+                </center>
+              <% end %>
+
+      </div>
+    </div>
+
+
+

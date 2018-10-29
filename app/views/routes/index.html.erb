@@ -1,0 +1,98 @@
+<%= render 'layouts/custom_header' %>
+<br><br>
+<% if user_signed_in? %>
+<br>
+<br>
+<center><h1>Mes trajets déposés</h1></center><br>
+    <% if @routes.count == 0 %>
+        <center>Aucun trajet déposé.
+          <p><%= link_to new_route_path do %><span class="btn btn-primary">Déposer un trajet</span><% end %></p>
+        </center>
+
+    <% else %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Point de départ</th>
+              <th>Point d'arrivée</th>
+              <th>Date de départ</th>
+              <th>Nombre de place disponibles</th>
+              <th>Prix (DT)</th>
+              <th>Les personnes qui ont réservées</th>
+              <th>Réservations</th>
+              <th>Consuler</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @routes.each do |route| %>
+              <tr>
+                <td><%= route.departure_point %></td>
+                <td><%= route.arrival_point %></td>
+                <td><%= route.departure_time %></td>
+                <td><%= route.place_number %></td>
+                <td><%= route.price %></td>
+                <% if route.reservations.count == 0 %>
+                <td>Aucune réservation</td>
+                <% else %>
+                <td><% route.reservations.each do |r| %>
+                  <%= r.user.first_name %> <%= r.user.last_name %> : <%= r.place_nbr %> place(s)
+                  <% end %>
+                </td>
+                <% end %>
+                <% if route.reservations.count == 0 %>
+                <td>Pas de réservation</td>
+                <% else %>
+                <td><% route.reservations.each do |res| %>
+                  <% @user = User.find_by_id(res.user_id)%>
+                      <%= @user.first_name %> a réservé <%= res.place_nbr %> place(s).<br> 
+                      Contact : <%= @user.phone_number %>                      
+                    <% end %>
+                </td>
+                <% end %>
+                <td><p><%= link_to route do %><span class="btn btn-primary">Voir</span><% end %></p></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <p><%= link_to new_route_path do %><span class="btn btn-primary">Déposer un trajet</span><% end %></p>
+    <% end %>
+
+    <br>
+<br>
+<center><h1>Mes réservations</h1></center><br>
+    <% if @reservations.count == 0 %>
+        <center>Aucune réservation.
+        </center>
+
+    <% else %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Point de départ</th>
+              <th>Point d'arrivée</th>
+              <th>Date de départ</th>
+              <th>Nombre de place réservées</th>
+              <th>Prix (DT)</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @reservations.each do |res| %>
+            <% @route = Route.find_by_id(res.route_id) %>
+              <tr>
+                <td><%= @route.departure_point %></td>
+                <td><%= @route.arrival_point %></td>
+                <td><%= @route.departure_time.strftime("%m/%d/%Y à %H:%M") %> %></td>
+                <td><%= res.place_nbr %></td>
+                <td><%= @route.price * res.place_nbr%></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    <% end %>
+<% else %>
+<%= render 'routes/register' %>
+<% end %>
+
+<br>

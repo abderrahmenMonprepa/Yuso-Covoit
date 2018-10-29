@@ -1,0 +1,157 @@
+<% if user_signed_in? %>
+
+<div class="site-section block-13 bg-light">
+  <div class="container" ng-app="">
+    <%= render 'layouts/custom_header' %>
+     <div class="row mb-5">
+        <div class="col-md-7 section-heading">
+          <span class="subheading-sm">Trajet déposé par <%= @route.user.first_name %> </span>
+        </div>
+      </div>
+
+      <table class="table">
+        <tr>
+          <td colspan="2">
+          <p>
+            <strong>Point de départ : </strong>
+            <%= @route.departure_point %>
+          </p>
+
+          <p>
+            <strong>Point d'arrivée : </strong>
+            <%= @route.arrival_point %>
+          </p>
+
+          <p>
+            <strong>Date de départ : </strong>
+            <%= @route.departure_time.strftime("%m/%d/%Y à %H:%M") %>
+          </p>
+
+          <p>
+            <strong>Date d'arrivée estimée : </strong>
+            <%= @route.estimated_arrival_time.strftime("%m/%d/%Y à %H:%M") %>
+          </p>
+
+          <p>
+            <strong>Nombre de places disponibles : </strong>
+            <%= @route.place_number %>
+          </p>
+
+          <p>
+            <strong>Prix:</strong>
+            <%= @route.price %> dinars
+          </p>
+
+          <p>
+            <strong>Possède un animal de companie : </strong>
+            <% if  @route.animal_permission == false %>
+            Non
+            <% else %>
+            Oui
+            <% end %>
+          </p>
+
+          <p>
+            <strong>Fumeur : </strong>
+            <% if @route.smoker_permission == false %>
+            Non
+            <% else %>
+            Oui
+            <% end %>
+          </p>
+
+          <p>
+            <strong>Contient du bagage : </strong>
+            <% if @route.luggage == false %>
+            Non
+            <% else %>
+            Oui
+            <% end %>
+          </p>
+          </td>
+
+          <td>
+            <!-- <p><span class="btn btn-primary">Contacter l'annonceur</span></p> -->
+
+          Numéro de Tél : <%= @route.user.phone_number %><br>
+
+          <div class="col-md-12 pr-md-10">
+          <%= form_for [@route, Message.new] do |form| %>
+            <div class="form-group">
+                <%= form.text_area :message_content, id: :message_content ,cols: "30" ,rows: "7" ,class: "form-control px-3 py-3" , placeholder: "Message" %>
+            </div>
+            <div class="form-group">
+               <%= form.submit "Envoyer message" ,class: "btn btn-primary py-3 px-5" %>
+            </div>
+           <% end %>
+        </div>
+          </td>
+        </tr>
+      </table>
+
+
+        <% if @route.place_number != 0%>
+          <p><%= link_to new_reservation_path(:route_res => @route.id) do %><span class="btn btn-primary">Réserver une place</span><% end %></p>
+        <% else %>
+          <p><span class="btn btn-primary">Complet</span></p>
+        <% end %>
+      </div>
+    </div>
+<% end %>
+
+<center>
+  <div class="site-section">
+    <div class="container">
+      <div class="row block-9">
+        <div class="col-md-6 pr-md-5">
+          <%= form_for [@route, UserComment.new] do |form| %>
+              <% if @user_comment.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@user_comment.errors.count, "error") %> prohibited this user_comment from being saved:</h2>
+
+                  <ul>
+                  <% @user_comment.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            <div class="form-group">
+                <%= form.label :content, "Ajouter un commentaire" %>
+                <%= form.text_area :content, id: :user_comment_content ,cols: "30" ,rows: "7" ,class: "form-control px-3 py-3" , placeholder: "Message" %>
+            </div>
+            <div class="form-group">
+               <%= form.submit "Ajouter commentaire" ,class: "btn btn-primary py-3 px-5" %>
+            </div>
+           <% end %>
+        </div>
+
+        <% if @comments.count == 0 %>
+        <% else %>
+        <div class="block-21">
+            <figure class="mr-3">
+              <img src="assets/bg1.jpg" alt="" class="img-fluid">
+            </figure>
+
+            <div class="text">
+              <h3 class="heading"><a href="#">Derniers commentaires</a></h3>
+              <% @comments.each do |c| %>
+              <div class="meta">
+                <div><strong><%= c.content%></strong></div>
+                <div><a href="#"> <%= c.created_at %> par <%= User.find_by_id(c.user_id).first_name %></a></div>
+              </div>
+              <% end %>
+            </div>
+        </div>
+        <% end %>
+        
+      </div>
+    </div>      
+  </div>
+</center>
+
+
+
+
+
+

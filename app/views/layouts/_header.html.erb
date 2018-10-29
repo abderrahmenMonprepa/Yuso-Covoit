@@ -1,0 +1,91 @@
+<!-- Header -->  
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand">Yuso-Covoit</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Yuso-Covoit
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a href="index.html" class="nav-link">Accueil</a></li>
+          <% if not user_signed_in? %>
+          <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#sign_in_modal">Connexion</a></li>
+          <% end %>
+          
+          
+          <% if user_signed_in? %>
+          <li class="nav-item"><a><%= link_to "Mes trajets" ,trajets_path, class: "nav-link" %></a></li>
+          <li class="nav-item"><a><%= link_to "Ma messagerie" ,messages_path, class: "nav-link" %></a></li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= current_user.first_name%></a>
+              <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                  <span class="with-arrow"><span class="bg-primary"></span></span>
+                  <div class="d-flex no-block align-items-center p-15 text-white m-b-10">
+                      
+                      <div>
+                          <h4><%= current_user.email %></h4>
+                      </div>
+                  </div>
+
+                  <div class="dropdown-divider"></div>
+
+                  <%= link_to  edit_user_registration_path , class: "dropdown-item" do %>
+                  <i class="ti-settings m-r-5 m-l-5"></i>
+                  Modifier profil<% end %>
+                 
+                  <%= link_to  destroy_user_session_path, method: :delete , class: "dropdown-item" do %>
+                  <i class="fa fa-power-off m-r-5 m-l-5"></i>
+                  Se déconnecter<% end %> 
+                  
+                  <div class="dropdown-divider"></div>
+                  
+              </div>
+          </li> 
+          <% else %>
+          <li class="nav-item"><a><%= link_to "Inscription" ,new_user_registration_path, class: "nav-link" %></a></li>
+          <% end %> 
+          <li class="nav-item"><a><%= link_to "Contact" ,contact_path, class: "nav-link" %></a></li>
+        </ul>
+      </div>
+    </div>
+</nav>
+<!-- END Header -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="sign_in_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Yuso-Covoit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+          <div class="form-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "new-password" , class: "form-control" %>
+          </div>
+          <center>
+            <div class="actions">
+              <%= f.submit "Se connecter" , class: "btn btn-primary" %>
+            </div>
+          </center>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>

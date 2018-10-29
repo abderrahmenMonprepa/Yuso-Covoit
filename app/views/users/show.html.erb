@@ -1,0 +1,57 @@
+<center>
+	<div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Informations de votre compte</h5>
+                <div class="steamline m-t-40">
+                    <div class="sl-item">
+
+                        <div class="sl-right">
+                            <div class="font-medium">Prénom</div>
+                            <div class="desc"><%= @user.first_name %> </div>
+                        </div>
+                    </div>
+                    <div class="sl-item">
+                        <div class="sl-right">
+                            <div class="font-medium">Nom</div>
+                            <div class="desc"><%= @user.last_name %> </div>
+                        </div>
+                    </div>
+                    <div class="sl-item">
+
+                        <div class="sl-right">
+                            <div class="font-medium">Email</div>
+                            <div class="desc"><%= @user.email %></div>
+                        </div>
+                    </div>
+                    <div class="sl-item">
+                        <div class="sl-right">
+                            <div class="font-medium">Section</div>
+                            <div class="desc"><%= @user.section %></div>
+                        </div>
+                    </div>
+                    <div class="sl-item">
+
+                        <div class="sl-right">
+                            <div class="font-medium">Année scolaire </div>
+                            <div class="desc">Niveau <%= @user.school_year %> </div>
+                        </div>
+                    </div>
+                    <div class="sl-item">
+                        <div class="sl-right">
+                            <div class="font-medium">Institut </div>
+                            <div class="desc"><%= @user.institute.institute_name %> </div>
+                        </div>
+                    </div>
+                    <div class="sl-item">
+                        <div class="sl-right">
+                            <div class="font-medium">Ville </div>
+                            <div class="desc"><%= @user.city %> </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
