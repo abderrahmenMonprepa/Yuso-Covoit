@@ -29,7 +29,7 @@
               <tr>
                 <td><%= route.departure_point %></td>
                 <td><%= route.arrival_point %></td>
-                <td><%= route.departure_time %></td>
+                <td><%= route.departure_date %> <%= @route.departure_time %> </td>
                 <td><%= route.place_number %></td>
                 <td><%= route.price %></td>
                 <% if route.reservations.count == 0 %>
@@ -83,7 +83,7 @@
               <tr>
                 <td><%= @route.departure_point %></td>
                 <td><%= @route.arrival_point %></td>
-                <td><%= @route.departure_time.strftime("%m/%d/%Y à %H:%M") %> </td>
+                <td><%= @route.departure_date %> <%= @route.departure_time %> </td>
                 <td><%= res.place_nbr %></td>
                 <td><%= @route.price * res.place_nbr%></td>
               </tr>

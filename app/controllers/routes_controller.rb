@@ -18,7 +18,7 @@ class RoutesController < ApplicationController
     if params[:search_departure].present? and params[:search_arrival].present? and params[:search_date].present?
 
       @routes = Route.where("routes.departure_point LIKE ? and routes.arrival_point LIKE ?
-       and routes.departure_time LIKE ?  ", "#{params[:search_departure]}" , "#{params[:search_arrival]}" , "#{params[:search_date]}" )  
+       and routes.departure_date LIKE ?  ", "#{params[:search_departure]}" , "#{params[:search_arrival]}" , "#{params[:search_date]}" )  
 
     elsif params[:search_departure].present? and params[:search_arrival].present? 
 
@@ -26,10 +26,10 @@ class RoutesController < ApplicationController
 
     elsif params[:search_departure].present? and params[:search_date].present?
       
-      @routes = Route.where("routes.arrival_point LIKE ? and routes.departure_time LIKE ?  " , "#{params[:search_departure]}" , "#{params[:search_date]}" )  
+      @routes = Route.where("routes.arrival_point LIKE ? and routes.departure_date LIKE ?  " , "#{params[:search_departure]}" , "#{params[:search_date]}" )  
     elsif params[:search_arrival].present?  and params[:search_date].present?
 
-      @routes = Route.where("routes.departure_point LIKE ?  and routes.departure_time LIKE ?  ", "#{params[:search_arrival]}" , "#{params[:search_date]}" ) 
+      @routes = Route.where("routes.departure_point LIKE ?  and routes.departure_date LIKE ?  ", "#{params[:search_arrival]}" , "#{params[:search_date]}" ) 
 
     elsif params[:search_departure].present? 
 
@@ -38,7 +38,7 @@ class RoutesController < ApplicationController
 
     elsif params[:search_date].present?
 
-      @routes = Route.where(" routes.departure_time LIKE ?  ",  "#{params[:search_date]}" ) 
+      @routes = Route.where(" routes.departure_date LIKE ?  ",  "#{params[:search_date]}" ) 
 
     elsif params[:search_arrival].present?  
 

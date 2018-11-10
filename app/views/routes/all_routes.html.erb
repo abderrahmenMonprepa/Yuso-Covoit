@@ -31,7 +31,7 @@
                           <% end %>
                         <div class="name-text align-self-center">
                           <h2 class="heading"><%= r.departure_point%> --> <%= r.arrival_point%></h2>
-                          <span class="meta">Date de départ: <%= r.departure_time.strftime("%m/%d/%Y à %H:%M") %></span>
+                          <span class="meta">Date de départ: <%= r.departure_date%> <%= @route.departure_time %> </span>
                           <span class="meta">Nombre de places disponibles: <%= r.place_number %></span>
                         </div>
                         <div class="image align-self-center"></div>
