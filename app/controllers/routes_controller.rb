@@ -1,5 +1,6 @@
 class RoutesController < ApplicationController
   before_action :set_route, only: [:show, :edit, :update, :destroy ]
+  
 
   # GET /routes
   # GET /routes.json
@@ -118,7 +119,9 @@ class RoutesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def route_params
-      params.require(:route).permit(:departure_point, :arrival_point, :departure_time, :estimated_arrival_time, :place_number, :price, 
+      params.require(:route).permit(:departure_point, :arrival_point, :departure_date, :departure_time, :estimated_arrival_time, :place_number, :price, 
       :animal_permission, :smoker_permission, :luggage, :user_id , :passenger_or_conducter)
     end
+
+    
 end
