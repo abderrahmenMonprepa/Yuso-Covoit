@@ -1,7 +1,5 @@
 class Route < ApplicationRecord
 
-  before_save :format_departure_date
-
   belongs_to :user
   has_many :reservations
   has_many :user_comments

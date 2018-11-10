@@ -178,7 +178,7 @@
               <div class="vcard d-flex mb-3">
                 <div class="name-text align-self-center">
                   <h2 class="heading"><%= t.departure_point%> --> <%= t.arrival_point %></h2>
-                  <%= t.departure_date %>
+                  <%= t.departure_date %> <%= t.departure_time.strftime("%H:%M") %>
                 </div>
               </div>
             </div>

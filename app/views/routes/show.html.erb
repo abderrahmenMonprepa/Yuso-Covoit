@@ -24,12 +24,7 @@
 
           <p>
             <strong>Date de départ : </strong>
-            <%= @route.departure_time.strftime("%m/%d/%Y à %H:%M") %>
-          </p>
-
-          <p>
-            <strong>Date d'arrivée estimée : </strong>
-            <%= @route.estimated_arrival_time.strftime("%m/%d/%Y à %H:%M") %>
+            <%= @route.departure_date %> <%= @route.departure_time.strftime("%H:%M") %>
           </p>
 
           <p>
