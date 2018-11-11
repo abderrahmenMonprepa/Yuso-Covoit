@@ -44,9 +44,7 @@
           </tbody>
         </table>
     <% end %>
-<% else %>
-<%= render 'routes/register' %>
-<% end %>
+
 <br>
 
 <center><h1>Les messages reçus</h1></center>
@@ -83,4 +81,12 @@
             <% end %>
           </tbody>
         </table>
+<% end %>
+
+<% else %>
+<div class="site-section bg-light">
+      <div class="container">
+        <%= render 'routes/register' %>
+      </div>
+</div>
 <% end %>

@@ -1,19 +1,8 @@
 <% if user_signed_in? %>
 
-
-<div class="item"  style="background-color: #A0A5A4; height: 150px;">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-md-10">
-        <%= render 'layouts/custom_header' %>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="site-section block-13 bg-light">
   <div class="container" ng-app="">
-    
+    <%= render 'layouts/custom_header' %>
      <div class="row mb-5">
         <div class="col-md-7 section-heading">
           <span class="subheading-sm">Trajet déposé par <%= @route.user.first_name %> </span>
@@ -103,7 +92,7 @@
         <% end %>
       </div>
     </div>
-<% end %>
+
 
 <center>
   <div class="site-section">
@@ -156,7 +145,13 @@
   </div>
 </center>
 
-
+<% else %>
+<div class="site-section bg-light">
+      <div class="container">
+        <%= render 'routes/register' %>
+      </div>
+</div>
+<% end %>
 
 
 

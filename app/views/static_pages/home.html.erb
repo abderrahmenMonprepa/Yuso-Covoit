@@ -22,7 +22,7 @@
               <% if user_signed_in? %>
                 <p><%= link_to new_route_path do %><span class="btn btn-primary">Déposer un trajet</span><% end %></p>
               <% else %>
-                <p><%= link_to new_user_registration_path do %><span class="btn btn-primary">Déposer un trajet</span><% end %></p>
+                <p><%= link_to new_user_session_path do %><span class="btn btn-primary">Déposer un trajet</span><% end %></p>
               <% end %>
             </div>
           </div>
