@@ -1,8 +1,15 @@
-<%= render 'layouts/custom_header' %>
-<br><br>
+
 <% if user_signed_in? %>
-<br>
-<br>
+
+<div class="item"  style="background-color: #A0A5A4; height: 150px;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-10">
+        <%= render 'layouts/custom_header' %>
+      </div>
+    </div>
+  </div>
+</div>
 <center><h1>Mes trajets déposés</h1></center><br>
     <% if @routes.count == 0 %>
         <center>Aucun trajet déposé.
@@ -94,5 +101,3 @@
 <% else %>
 <%= render 'routes/register' %>
 <% end %>
-
-<br>
