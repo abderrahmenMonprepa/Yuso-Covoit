@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Yuso-Covoit</title>
+    <meta charset="utf-8">
+
+    <script src="assets/jquery.dataTables.min.js" ></script>
+
+  </head>
+  <body>
+	<div class="site-section block-13 bg-light">
+	  <div class="container" ng-app="">
+	     <div class="row mb-5">
+	        <div class="col-md-7 section-heading">
+	          <span class="subheading-sm">Liste des utilisateurs</span>
+	        </div>
+	      </div>
+			  	<table id="example" class="table table-striped table-bordered" style="width:100%">
+			        <thead>
+			            <tr>
+			                <th>Prénom</th>
+			                <th>Nom</th>
+			                <th>Email</th>
+			                <th>Tél</th>
+			                <th>Adresse</th>
+			                <th>Supprimer</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        	<% @users.each do |u| %>
+				            <tr>
+				                <td><%= u.first_name %></td>
+				                <td><%= u.last_name %></td>
+				                <td><%= u.email %></td>
+				                <td><%= u.phone_number %></td>
+				                <td><%= u.address %></td>
+				                <td><%= link_to 'Supprimer', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				            </tr>
+			            <% end %>
+
+			           
+			        </tbody>
+
+			    </table>
+			  </div>
+		</div>
+  </body>
+  </html>
+  <script type="text/javascript">
+  	$(document).ready(function() {
+	    $('#example').DataTable();
+	} );
+  </script>
+
+
+

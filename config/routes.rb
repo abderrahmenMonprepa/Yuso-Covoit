@@ -30,5 +30,6 @@ Rails.application.routes.draw do
   get 'contact' => 'static_pages#contact'
   get 'all_routes' => 'routes#all_routes'
   post 'all_routes' => 'routes#all_routes'
+  get 'manage' => 'users#manage_users'
 
 end
