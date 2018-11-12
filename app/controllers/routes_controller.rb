@@ -16,33 +16,32 @@ class RoutesController < ApplicationController
 
     # Search routes by departure_point, arrival_oint and date
     if params[:search_departure].present? and params[:search_arrival].present? and params[:search_date].present?
-
-      @routes = Route.where("routes.departure_point LIKE ? and routes.arrival_point LIKE ?
-       and routes.departure_date LIKE ?  ", "#{params[:search_departure]}" , "#{params[:search_arrival]}" , "#{params[:search_date]}" )  
+  
+      @routes = Route.departure(params[:search_departure]).arrival(params[:search_arrival]).date(params[:search_date])
 
     elsif params[:search_departure].present? and params[:search_arrival].present? 
 
-      @routes = Route.where("routes.departure_point LIKE ? and routes.arrival_point LIKE ? ", "#{params[:search_departure]}" , "#{params[:search_arrival]}"  ) 
+       @routes = Route.departure(params[:search_departure]).arrival(params[:search_arrival])
 
     elsif params[:search_departure].present? and params[:search_date].present?
       
-      @routes = Route.where("routes.arrival_point LIKE ? and routes.departure_date LIKE ?  " , "#{params[:search_departure]}" , "#{params[:search_date]}" )  
+       @routes = Route.departure(params[:search_departure]).date(params[:search_date])  
+
     elsif params[:search_arrival].present?  and params[:search_date].present?
 
-      @routes = Route.where("routes.departure_point LIKE ?  and routes.departure_date LIKE ?  ", "#{params[:search_arrival]}" , "#{params[:search_date]}" ) 
+       @routes = Route.arrival(params[:search_arrival]).date(params[:search_date])
 
     elsif params[:search_departure].present? 
 
-      @routes = Route.where("routes.departure_point LIKE ?  ", "#{params[:search_departure]}"  ) 
-
+       @routes = Route.departure(params[:search_departure])
 
     elsif params[:search_date].present?
 
-      @routes = Route.where(" routes.departure_date LIKE ?  ",  "#{params[:search_date]}" ) 
+       @routes = Route.date(params[:search_date])
 
     elsif params[:search_arrival].present?  
 
-      @routes = Route.where("routes.arrival_point LIKE ?   ", "#{params[:search_arrival]}"  )   
+       @routes = Route.arrival(params[:search_arrival]) 
     else 
       @routes = Route.all
     end

@@ -1,5 +1,9 @@
 class Route < ApplicationRecord
 
+  scope :departure, -> (departure_point) { where departure_point: departure_point }
+  scope :arrival, -> (arrival_point) { where arrival_point: arrival_point }
+  scope :date, -> (departure_date) { where departure_date: departure_date }
+
   belongs_to :user
   has_many :reservations
   has_many :user_comments
@@ -15,4 +19,5 @@ class Route < ApplicationRecord
   def format_departure_date
       self.departure_time.strftime("%d %m,%Y") unless self.departure_time.nil?
   end
+
 end
