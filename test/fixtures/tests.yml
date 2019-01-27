@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  test_name: MyString
+  test_category: MyText
+  test_date: 2019-01-19 16:34:45
+  test_number: 1.5
+
+two:
+  test_name: MyString
+  test_category: MyText
+  test_date: 2019-01-19 16:34:45
+  test_number: 1.5

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :tests
   resources :messages
   resources :reservations
   post '/rate' => 'rater#create', :as => 'rate'
